@@ -1,0 +1,49 @@
+{
+    "utilisateur": {
+        "nom": "Alice Martin",
+        "age": 28,
+        "profession": "Analyste Quantitatif",
+        "interets": [
+            "finance",
+            "programmation",
+            "statistiques"
+        ]
+    },
+    "projets": [
+        {
+            "nom": "Mod\u00e9lisation des risques",
+            "outils": [
+                "Python",
+                "R",
+                "SQL"
+            ],
+            "statut": "termin\u00e9"
+        },
+        {
+            "nom": "Pr\u00e9diction des prix du march\u00e9",
+            "outils": [
+                "Python",
+                "TensorFlow",
+                "scikit-learn"
+            ],
+            "statut": "en cours"
+        }
+    ],
+    "competences": {
+        "langages": [
+            "Python",
+            "R",
+            "VBA"
+        ],
+        "analyse": [
+            "machine learning",
+            "\u00e9conom\u00e9trie",
+            "finance de march\u00e9"
+        ],
+        "soft skills": [
+            "esprit d'\u00e9quipe",
+            "adaptabilit\u00e9",
+            "curiosit\u00e9"
+        ]
+    }
+}
