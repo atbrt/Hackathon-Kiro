@@ -53,8 +53,12 @@ def rolling_window_cost(sigma0, sigma1, V_rlist, cost_list, w_rlist, M_rlist):
             S+= (max(0, S2)**2)*c
     return S
 
-def size_contraint():
-    #incomplet
-    pass
+def size_contraint(sigma0, sigma1, V_blist, m_blist, M_blist):
+    n = len(sigma0)
+    S = 0
+    number_constraint = len(V_blist)
+    for i in range(number_constraint):
+        for i in range(1, N-1)
+
 
 
