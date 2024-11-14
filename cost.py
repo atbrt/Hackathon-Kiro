@@ -1,4 +1,3 @@
-#Cout s
 from permutation import invert_permutation
 
 def resequencing_cost(sigma1, sigma2, c_s, delta_s):
@@ -11,10 +10,12 @@ def resequencing_cost(sigma1, sigma2, c_s, delta_s):
     S = 0
     sigma1inv = invert_permutation(sigma1)
     sigma2inv = invert_permutation(sigma2)
-    for v in range(1, n+1):
+    for v in range(0, n):
         S += c_s*max(0, sigma1inv[v] - delta_s - sigma2inv[v])
     return S
 
+a = resequencing_cost([1,2,3,4,5], [1,2,3,4,5], 1, 0)
+print(a)
 
 def lot_change_cost(sigma0, sigma1, partition, cost):
     n = len(sigma0)

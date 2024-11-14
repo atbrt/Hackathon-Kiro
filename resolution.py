@@ -28,6 +28,11 @@ def resoudre(t1 ,t2 ,t3 ,n , fichier):
         else:
             c = cbis
     
+    sigma0 = sigma.deepcopy()
+
+    
+
+    t = time.time()
 
     
 
