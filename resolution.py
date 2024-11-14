@@ -3,6 +3,7 @@ import random
 from copy import *
 from permutation import *
 from fichiersjson import *
+from cost import *
 def permutation(i, j, l):
     a,b = l[i], l[j]
     l[j], l[i] = a,b
@@ -53,6 +54,8 @@ def resoudre(t1 ,t2 ,t3 ,n , fichier):
     data=ouvrir(fichier)
     sigma = paint_exit(data,sigma)
     sigma2 = deepcopy(sigma)
+    sigma2=sigma2.tolist()
+    sigma=sigma.tolist()
 
     t = time.time()
     c = sommecout(fichier, sigma2, None, 2)
@@ -78,4 +81,6 @@ def resoudre(t1 ,t2 ,t3 ,n , fichier):
 
     
 
-print(resoudre(1,1,1,5,"tiny.json"))
+sol=resoudre(1,1,1,5,"tiny.json")[1]
+print(sol)
+sortiefinale("tiny.json",sol,"resultat1.json")
