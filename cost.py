@@ -15,6 +15,7 @@ def resequencing_cost(sigma1, sigma2, c_s, delta_s):
         S += c_s*max(0, sigma1inv[v] - delta_s - sigma2inv[v])
     return S
 
+
 def lot_change_cost(sigma0, sigma1, partition, cost):
     n = len(sigma0)
     S = 0
@@ -32,6 +33,9 @@ def lot_change_cost(sigma0, sigma1, partition, cost):
             S+= cost
     return S
 
+#a = lot_change_cost([1,2,3,4,5], None, [[1,2], [3,4,5]], 1)
+#print(a)
+
 def rolling_window_cost(sigma0, sigma1, V_r, cost, w_r, M_r):
     n = len(sigma0)
     S = 0
@@ -44,14 +48,16 @@ def rolling_window_cost(sigma0, sigma1, V_r, cost, w_r, M_r):
         S+= (max(0, S2)**2)*cost
     return S
 
+#a = rolling_window_cost([1,2,3,4,5], None, [1,2,3], 1, 1, 3)
+#print(a)
+
 def size_contraint(sigma0, sigma1, V_b, m_b, M_b, cost):
     n = len(sigma0)
     S = 0
-
-    for i in range(1, n):
-        for j in range(i, n+1):
+    for i in range(0, n-1):
+        for j in range(i, n):
+            c = True
             if (i >= 2 and sigma0[i-1] not in V_b):
-                c = True
                 for b in range(i, j+1):
                     if sigma0[b] not in V_b:
                         c = False
