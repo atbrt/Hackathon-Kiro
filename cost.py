@@ -41,7 +41,7 @@ def rolling_window_cost(sigma0, sigma1, V_r, cost, w_r, M_r):
         for a in range(v, v+w_r-1):
             if sigma0[a] in V_r:
                 S2 += 1
-        S+= (max(0, S2)**2)*c
+        S+= (max(0, S2)**2)*cost
     return S
 
 def size_contraint(sigma0, sigma1, V_b, m_b, M_b, cost):
