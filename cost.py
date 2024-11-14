@@ -1,5 +1,5 @@
 #Cout s
-from permutation import inverse_perm
+from permutation import invert_permutation
 
 def resequencing_cost(sigma1, sigma2, c_s, delta_s):
     """
@@ -9,8 +9,8 @@ def resequencing_cost(sigma1, sigma2, c_s, delta_s):
     """
     n = len(sigma1)
     S = 0
-    sigma1inv = inverse_perm(sigma1)
-    sigma2inv = inverse_perm(sigma2)
+    sigma1inv = invert_permutation(sigma1)
+    sigma2inv = invert_permutation(sigma2)
     for v in range(1, n+1):
         S += c_s*max(0, sigma1inv[v] - delta_s - sigma2inv[v])
     return S
