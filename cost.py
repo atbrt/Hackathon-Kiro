@@ -1,3 +1,11 @@
+
+
+import json 
+
+def ouvrir(fichier):
+    with open(fichier, 'r') as f:
+        data=json.load(f)
+    return data
 from permutation import invert_permutation
 
 def resequencing_cost(sigma1, sigma2, c_s, delta_s):
@@ -14,8 +22,6 @@ def resequencing_cost(sigma1, sigma2, c_s, delta_s):
         S += c_s*max(0, sigma1inv[v] - delta_s - sigma2inv[v])
     return S
 
-a = resequencing_cost([1,2,3,4,5], [1,2,3,4,5], 1, 0)
-print(a)
 
 def lot_change_cost(sigma0, sigma1, partition, cost):
     n = len(sigma0)
@@ -66,6 +72,65 @@ def size_contraint(sigma0, sigma1, V_b, m_b, M_b, cost):
                     if (j <= n-2 and sigma0[j+1] not in V_b):
                         S += cost* (max(0, m_b - j + i -1, j-i+1 - M_b))**2
     return S
+
+
+def sommecout(fichier, sigma1, sigma2, k):
+    somme=0
+    dico=ouvrir(fichier)
+    shop=dico["shops"][k]
+    
+    for contrainte in dico["constraints"]:
+        if contrainte["shop"]==shop["name"]:
+                if contrainte["type"]=="lot_change":
+                    partition=contrainte["partition"]
+                    cout=contrainte["cost"]
+                    somme+=lot_change_cost(sigma1, sigma2, partition, cout)
+                    
+                elif contrainte["type"]=="batch_size":
+                    vehic=contrainte["vehicles"]
+                    cost=contrainte["cost"]
+                    mini=contrainte["min_vehicles"]
+                    maxi=contrainte["max_vehicles"]
+                    somme+=size_contraint(sigma1, sigma2, vehic, mini, maxi, cost)
+                    
+                else:
+                    vehic2=contrainte["vehicles"]
+                    cost=contrainte["cost"]
+                    w=contrainte["window_size"]
+                    m=contrainte["max_vehicles"]
+                    somme+=rolling_window_cost(sigma1, sigma2, vehic2, cost, w, m)
+                    
+    return somme
+    
+
+def coutsequencing(fichier, sigma1, sigma2, k):
+    somme=0
+    dico=ouvrir(fichier)
+   
+    shop=dico["shops"][k]
+    c_s=dico["parameters"]["resequencing_cost"]
+    delta_s=shop["resequencing_lag"]
+    somme+=int(resequencing_cost(sigma1, sigma2, c_s, delta_s))
+    return somme
+
+def sortiedico(fichier, tableau):
+    dico=ouvrir(fichier)
+    dicos={}
+    for i in range(len(tableau)):
+        nouveau={"entry":tableau[i][0], "exit":tableau[i][1]}
+        nom=dico["shops"][i]["name"]
+        dicos[nom]=nouveau
+        
+    return dicos
+
+def sortiefinale(fichier, tableau, nom_sortie):
+    dico=sortiedico(fichier, tableau)
+   
+    with open(nom_sortie, 'w') as f:
+        json.dump(dico, f)
+
+
+
 
 
 
