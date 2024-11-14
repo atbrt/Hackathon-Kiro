@@ -5,13 +5,8 @@ def permutation(i, j, l):
     a,b = l[i], l[j]
     l[j], l[i] = a,b
 
-def cout(shop, i):
-    pass
-
-def cout_re(shop, i):
-    pass
-
-
+from cost import sommecout
+from cost import coutsequencing
 
 def resoudre(t1 ,t2 ,t3 ,n , fichier):
     fichier = ""
@@ -19,13 +14,13 @@ def resoudre(t1 ,t2 ,t3 ,n , fichier):
     sigma = [i for i in range(n)]
     C = 0
 
-    c = cout(fichier, sigma, None, 0)
+    c = sommecout(fichier, sigma, None, 0)
     t = time.time()
-    while time.time() < t1:
+    while time.time() - t< t1:
         a = random.randint(0,n-1)
         b = random.randint(0,n-1)
         permutation(a, b, sigma)
-        cbis = cout(fichier, sigma, None, 0)
+        cbis = sommecout(fichier, sigma, None, 0)
         if c < cbis:
             permutation(a, b, sigma)
         else:
@@ -38,12 +33,12 @@ def resoudre(t1 ,t2 ,t3 ,n , fichier):
 
     t = time.time()
     c = None
-    while time.time() < t2:
+    while time.time() - t < t2:
         a = random.randint(0,n-1)
         b = random.randint(0,n-1)
         sigma1 = sigma.copy()
         permutation(a,b,sigma1)
-        cbis = cout(fichier, sigma, None, 1) + cout_re(fichier, sigma, sigma1, 1)
+        cbis = sommecout(fichier, sigma1, None, 1) + coutsequencing(fichier, sigma0, sigma1, 1)
         if c == None:
             c = cbis
         elif c < cbis:
@@ -58,13 +53,13 @@ def resoudre(t1 ,t2 ,t3 ,n , fichier):
     sigma2 = sigma.deepcopy()
 
     t = time.time()
-    c = cout(fichier, sigma2, None, 2)
-    while time.time() < t3:
+    c = sommecout(fichier, sigma2, None, 2)
+    while time.time() - t < t3:
         a = random.randint(0,n-1)
         b = random.randint(0,n-1)
         sigma3 = sigma.copy()
         permutation(a,b,sigma2)
-        cbis = cout(fichier, sigma3, None, 0) + cout_re(fichier, sigma, sigma3, 0)
+        cbis = sommecout(fichier, sigma3, None, 2) + coutsequencing(fichier, sigma2, sigma3, 2)
         if c == None:
             c = cbis
         elif c < cbis:
