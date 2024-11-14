@@ -63,11 +63,9 @@ def size_contraint(sigma0, sigma1, V_b, m_b, M_b, cost):
                     if sigma0[b] not in V_b:
                         c = False
                 if c:
-                    if (j <= n-1 and sigma0[j+1] not in V_b):
+                    if (j <= n-2 and sigma0[j+1] not in V_b):
                         S += cost* (max(0, m_b - j + i -1, j-i+1 - M_b))**2
     return S
-
-
 
 
 
