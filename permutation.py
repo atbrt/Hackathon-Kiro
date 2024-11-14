@@ -1,8 +1,7 @@
 import numpy as np
 
 def invert_permutation(p):
-    """Return an array s with which np.array_equal(arr[p][s], arr) is True.
-    The array_like argument p must be some permutation of 0, 1, ..., len(p)-1.
+    """retourne l'inverse de la permutation p
     """
     p = np.asanyarray(p) # in case p is a tuple, etc.
     p=p-1
@@ -11,4 +10,13 @@ def invert_permutation(p):
     s=s+1
     return s
 
-print(invert_permutation([5,4,1,3,2]))
+def tau(t,delta,n):
+    tau_arr=np.arange(1,n+1).tolist()
+    delta_t=min(delta,n-t)
+    i=tau_arr.pop(t-1)
+    tau_arr.insert(t+delta_t,i)
+    return tau_arr
+
+test=[5,4,2,3,1]
+testm1=invert_permutation(test)
+print(np.array(test)[testm1-1])
