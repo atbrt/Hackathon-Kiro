@@ -17,6 +17,6 @@ def tau(t,delta,n):
     tau_arr.insert(t+delta_t,i)
     return tau_arr
 
-test=[5,4,2,3,1]
-testm1=invert_permutation(test)
-print(np.array(test)[testm1-1])
+def composition(permu1,permu2):
+    #renvoi permu1 rond permu 2
+    return np.array(permu1)[np.array(permu2)-1]
