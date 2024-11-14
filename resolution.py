@@ -1,6 +1,8 @@
 import time
 import random
-
+from copy import *
+from permutation import *
+from fichiersjson import *
 def permutation(i, j, l):
     a,b = l[i], l[j]
     l[j], l[i] = a,b
@@ -9,7 +11,7 @@ from cost import sommecout
 from cost import coutsequencing
 
 def resoudre(t1 ,t2 ,t3 ,n , fichier):
-    fichier = ""
+    #fichier = ""
 
     sigma = [i for i in range(n)]
     C = 0
@@ -26,7 +28,7 @@ def resoudre(t1 ,t2 ,t3 ,n , fichier):
         else:
             c = cbis
     C += c
-    sigma0 = sigma.deepcopy()
+    sigma0 = deepcopy(sigma)
 
 
 
@@ -46,10 +48,10 @@ def resoudre(t1 ,t2 ,t3 ,n , fichier):
         else:
             c = cbis
     C += C
-    sigma1 = sigma.deepcopy()
-
+    sigma1 = deepcopy(sigma)
     ###
-    sigma = paint_transition(sigma)
+    data=ouvrir(fichier)
+    sigma = paint_exit(data,sigma)
     sigma2 = sigma.deepcopy()
 
     t = time.time()
@@ -57,7 +59,7 @@ def resoudre(t1 ,t2 ,t3 ,n , fichier):
     while time.time() - t < t3:
         a = random.randint(0,n-1)
         b = random.randint(0,n-1)
-        sigma3 = sigma.copy()
+        sigma3 = deepcopy(sigma)
         permutation(a,b,sigma2)
         cbis = sommecout(fichier, sigma3, None, 2) + coutsequencing(fichier, sigma2, sigma3, 2)
         if c == None:
@@ -67,7 +69,7 @@ def resoudre(t1 ,t2 ,t3 ,n , fichier):
         else:
             c = cbis
     C += C
-    sigma3 = sigma.deepcopy()
+    sigma3 = deepcopy(sigma)
 
 
     sigma_list = [[sigma0, sigma0], [sigma1, sigma2], [sigma3, sigma3]]
@@ -76,3 +78,4 @@ def resoudre(t1 ,t2 ,t3 ,n , fichier):
 
     
 
+print(resoudre(1,1,1,5,"tiny.json"))
