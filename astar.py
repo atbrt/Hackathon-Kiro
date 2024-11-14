@@ -2,7 +2,9 @@ def neighbor_test(l):
     voisins = [l-1, l+1]
     return voisins
 
+from test import cookie
 
+print(cookie())
 
 def astar(initial_node, neighbor, target_node):
     """
@@ -44,6 +46,3 @@ def astar(initial_node, neighbor, target_node):
             a_explorer =  a_explorer + nouveau
         n += 1
     return "not found"
-
-a = astar(0, neighbor_test, 10)
-print(a)
