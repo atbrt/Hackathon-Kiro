@@ -13,7 +13,7 @@ from cost import coutsequencing
 def resoudre(t1 ,t2 ,t3 ,n , fichier):
     #fichier = ""
 
-    sigma = [i for i in range(n)]
+    sigma = [i+1 for i in range(n)]
     C = 0
 
     c = sommecout(fichier, sigma, None, 0)
@@ -52,7 +52,7 @@ def resoudre(t1 ,t2 ,t3 ,n , fichier):
     ###
     data=ouvrir(fichier)
     sigma = paint_exit(data,sigma)
-    sigma2 = sigma.deepcopy()
+    sigma2 = deepcopy(sigma)
 
     t = time.time()
     c = sommecout(fichier, sigma2, None, 2)
@@ -60,7 +60,7 @@ def resoudre(t1 ,t2 ,t3 ,n , fichier):
         a = random.randint(0,n-1)
         b = random.randint(0,n-1)
         sigma3 = deepcopy(sigma)
-        permutation(a,b,sigma2)
+        permutation(a,b,sigma3)
         cbis = sommecout(fichier, sigma3, None, 2) + coutsequencing(fichier, sigma2, sigma3, 2)
         if c == None:
             c = cbis

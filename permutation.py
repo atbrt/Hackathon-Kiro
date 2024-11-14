@@ -46,3 +46,6 @@ def paint_exit(data,sigma):
         sigma_exit=composition(tau_u,sigma_exit)
         
     return invert_permutation(sigma_exit)
+
+data=ouvrir("tiny.json")
+print(paint_exit(data,[3, 5, 1, 4, 2]))
