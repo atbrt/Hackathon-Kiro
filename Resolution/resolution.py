@@ -2,7 +2,7 @@ import time
 import random
 from copy import *
 from permutation import *
-from fichiersjson import *
+from ..json_files.fichiersjson import *
 from cost import *
 def permutation(i, j, l):
     a,b = l[i], l[j]

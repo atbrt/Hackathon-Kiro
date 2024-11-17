@@ -1,7 +1,4 @@
 
-
-
-
 def indices_twopaint(dico, l):
     ensemble=[]
     for k in range(len(dico["vehicles"])):

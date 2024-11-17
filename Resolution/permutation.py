@@ -1,5 +1,5 @@
 import numpy as np
-from fichiersjson import *
+from ..json_files.fichiersjson import *
 def invert_permutation(p):
     """retourne l'inverse de la permutation p
     """
